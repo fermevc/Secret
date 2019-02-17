@@ -29,7 +29,7 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 app.get("/logout", (req, res) => {
-  res.redirect("login");
+  res.redirect("home");
 });
 app.get("/register", (req, res) => {
   res.render("register");
