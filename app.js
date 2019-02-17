@@ -29,7 +29,7 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 app.get("/logout", (req, res) => {
-  res.redirect("home");
+  res.redirect("/");
 });
 app.get("/register", (req, res) => {
   res.render("register");
@@ -54,17 +54,19 @@ app.post("/register", (req, res) => {
 //add login post route
 app.post("/login", (req, res) => {
   const username = req.body.username;
-  const password = md5(req.body.password);
+  const password = req.body.password;
   User.findOne({ email: username }, (err, foundUser) => {
     if (err) {
       console.log(err);
     } else {
       if (foundUser) {
-        if (foundUser.password === password) {
-          res.render("secrets");
-        } else {
-          res.render("login");
-        }
+        bcrypt.compare(password, foundUser.password, (err, result) => {
+          if (result) {
+            res.render("secrets");
+          } else {
+            res.render("login");
+          }
+        });
       } else {
         res.render("login");
       }
