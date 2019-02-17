@@ -60,51 +60,10 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 //add register post route
-<<<<<<< HEAD
 app.post("/register", (req, res) => {});
 
 //add login post route
 app.post("/login", (req, res) => {});
-=======
-app.post("/register", (req, res) => {
-  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-    const newUser = new User({
-      email: req.body.username,
-      password: hash
-    });
-    newUser.save(err => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("secrets");
-      }
-    });
-  });
-});
-
-//add login post route
-app.post("/login", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  User.findOne({ email: username }, (err, foundUser) => {
-    if (err) {
-      console.log(err);
-    } else {
-      if (foundUser) {
-        bcrypt.compare(password, foundUser.password, (err, result) => {
-          if (result) {
-            res.render("secrets");
-          } else {
-            res.render("login");
-          }
-        });
-      } else {
-        res.render("login");
-      }
-    }
-  });
-});
->>>>>>> 4a86dffbfdae660ee2849398926bbaa954d178cf
 
 //start server
 app.listen(3000, () => {
