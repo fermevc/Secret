@@ -36,11 +36,7 @@ app.get("/register", (req, res) => {
 });
 //add register post route
 app.post("/register", (req, res) => {
-<<<<<<< HEAD
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-=======
-  bcrypt.hash(res.body.password, saltRounds, (err, hash) => {
->>>>>>> 50e8dc145dd7b481caffc68229daf0b0cd963ab4
     const newUser = new User({
       email: req.body.username,
       password: hash
